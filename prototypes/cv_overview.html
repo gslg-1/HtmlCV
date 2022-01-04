@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> CV </title>
+    <link type = "text/css" href = "styles/style1.css" media = " all" />
+    <style>
+      .Overview{
+        background-image: url(resources/experimental/nice.webp);
+        background-size: cover;
+        background-position: -150px;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        text-align: center;
+        width: 33%;
+        height: 100%;
+      }
+      .Overview img.AppFoto {
+        display: block;
+        border: white solid 5px;
+        border-radius: 50%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        max-width: 250px;
+      }
+      
+      .Overview img.OVSection {
+        display: block;
+        height: 38px;
+      }
+      .Overview h1 {
+        font-size: 32px;
+      }
+      .Overview h2 {
+        font-size: 24px;
+      }
+      .Overview h3 {
+        font-size: 18px;
+      }
+      .Overview section {
+        width: 100%;
+      }
+      .Overview ul {
+        /*border: solid yellow 1px;*/
+        display: block;
+        padding: 12px 48px;
+      }
+      .Overview ul li {
+        /*Allignment*/
+        width: 100%;
+        text-align: left;
+        /*List*/
+      }
+      li.Location
+      {
+        list-style-image: url("resources/external/map-pin.svg");
+      }
+      li.Phone
+      {
+        list-style-image: url("resources/external/phone.svg");
+      }
+      li.Mail
+      {
+        list-style-image: url("resources/external/mail.svg");
+      }
+      
+      
+      /*Right Side of the CV the actual Content*/
+      .CV{
+        width: 77%;
+        height: 100%;
+      }
+      .History
+      {
+        display: block;
+        float: left;        
+      }
+      .History::after
+      {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body >
+    <table>
+      <tr>
+        <td class="Overview">
+          <!-- Picture                        -->
+          <img class="AppFoto" src="resources/own/2020_Bewerbungsfoto.jpg" >
+          <!-- Name                           -->
+          <h1 class="Name">Gabriel Selig</h1>
+          <section class="Contact">
+            <h2> Contact </h2>
+            <ul>
+              <li class="Location">
+                <p> Ockerhäuser Allee 7</p>
+                <p> 35037 Marburg</p>
+              </li>            
+              <li class="Phone"> 
+                <p> +46(0)1632941902</p>
+              </li>
+              <li class="Mail">
+                <p> Gabriel.s@gmx.de</p>
+              </li>          
+            </ul>
+          </section>
+          <section class="Skills">
+            <h2> Languages </h2>
+            <div class="Language Skills">
+              <ul>
+                <li>englisch - gut</li>
+                <li>deutsch - gut</li>
+              </ul>
+            </div>
+            <!-- Skills                         -->
+            <div class="Key Skills">
+              <ul>
+                <li>C/C++</li>
+                <li>Assebler</li>
+                <li>Objektorientiert</li>
+                <li>Assebler</li>
+              </ul>
+            </div>
+            <div class="Build Skills">
+              <ul>
+                <li>Softwarebau - GCC</li>
+                <li>Softwarebau - Make</li>
+                <li>Build Steps - Linking</li>
+              </ul>
+            </div>
+            <div  class="Analysis Skills">
+              <ul>
+                <li>Debugging - GDB</li>
+                <li>Debugging - JLINK</li>
+                <li>Analysis - Static Code Analysis</li>
+                <li>Testing - Unit Test</li>
+              </ul>
+            </div>
+            <div class="Project Skills">
+              <ul>
+                <li>Project Management - Jira</li>
+                <li>Project Management - Jenkins</li>
+                <li>Project Management - CICD</li>
+                <li>Project Management - Agile Development</li>
+              </ul>
+            </div>    
+          </section>
+          <section class="Date">        
+            <p id="datetime"></p>
+            <script>
+              var dt = new Date();
+              document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
+            </script>
+          </section>
+        </td>
+        <td>
+          <section class="Content">
+            <h2>Arbeitserfahrung</h2>
+            <ul class="History">
+              
+              <h3 class="History"> 2001-2003</h3>
+              <li>
+                <h3> Beschäftigt als Elektroniker für Betriebstechnik</h3>
+                <p> 
+                  asdfsadfölidsjaföldsafjösdfaj
+                  asdf lasdkfjsöladfjsöadlf jölsadfj öldsa jfsdaj sad
+                </p>
+              </li>
+
+              <h3 class="History"> 2003-2007</h3>
+              <li>
+                <h3> Beschäftigt als Elektroniker für Betriebstechnik</h3>
+                <p> 
+                  asdfsadfölidsjaföldsafjösdfaj
+                  asdf lasdkfjsöladfjsöadlf jölsadfj öldsa jfsdaj sad
+                </p>
+              </li>
+
+                </ul>
+                <h3 class="History"> 2003-2004</h3>
+                <ul class="History">
+                  <li>
+                    <h3> Beschäftigt als Elektroniker für Betriebstechnik</h3>
+                    <p> asdfsadfölidsjaföldsafjösdfaj
+                      asdf lasdkfjsöladfjsöadlf jölsadfj öldsa jfsdaj sad
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <h3> Beschäftigt als Elektroniker für Betriebstechnik</h3>
+                <p></p>
+              </li>
+              <li>
+                <h3> Abschluss der  Elektroniker für Betriebstechnik</h3>
+                <p></p>
+              </li>
+              </li>
+            </ul>
+          </section>    
+        </td>
+      </tr>
+    </table>    
+  </body>  
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> CV </title>
+    <link type = "text/css" href = "styles/style1.css" media = " all" />
+    <style>
+      
+    </style>
+  </head>
+  <body >
+    <svg id="diamond" width="600" height="600">
+    </svg>
+    <p id="demo"></p>
+
+    <script>
+
+      function toAngle(Number, Index)
+      {
+        let angle = (2 * Math.PI * Index) / Number;
+        return angle;
+      }
+      function toXY( cx, cy, Radius, Angle)
+      {
+        let XYPos = {
+          x:Radius,
+          y:Radius
+        };
+        XYPos.x = cx + (Radius * Math.sin( Angle ));
+        XYPos.y = cy + (Radius * Math.cos( Angle ));;
+        return XYPos;
+      }
+      function print_dimant (cx, cy, Radius ,ValueA, ValueC)
+      {
+        let text = "<b>Demo:</b> <br>";
+        let svg = document.getElementById("diamond");
+        let polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');        
+        polygon.setAttribute("style","fill:blue;stroke:purple;stroke-width:2;fill-opacity:0.5;");
+        for (let i = 0; i < ValueC; i++)
+        {          
+          let phi = toAngle(ValueC,i);
+          let r = (Radius * ValueA[i].value) /100;
+          let posAxis = toXY(cx, cy, Radius, phi);
+          let posVal = toXY(cx, cy, r, phi);
+          let point = svg.createSVGPoint();
+          
+          /*Build Axis*/
+          let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          let axisTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          line.setAttribute("x1",cx);
+          line.setAttribute("y1",cy);
+          line.setAttribute("x2",posAxis.x);
+          line.setAttribute("y2",posAxis.y);
+          axisTitle.setAttribute("x",posAxis.x);
+          axisTitle.setAttribute("y",posAxis.y);
+          axisTitle.setAttribute("fill","black");
+          axisTitle.setAttribute("font-weight", "bold");
+          //axisTitle.setAttribute("font", "bold");
+          axisTitle.setAttribute("font-family", "Verdana");
+          axisTitle.textContent = ValueA[i].label;
+          line.setAttribute("stroke","black");
+          line.setAttribute("stroke-width","2");          
+          /*Draw Axis*/
+          svg.appendChild(line);
+          svg.appendChild(axisTitle);
+          /*Build Points*/
+          point.x = posVal.x;
+          point.y = posVal.y;
+          /*Add Point*/
+          polygon.points.appendItem(point);
+          
+          /*Debug Output*/
+          text += "################################<br>";
+          text += "Index: "   + i + "<br>";
+          text += "Value: "   + ValueA[i].value + "<br>";
+          text += "Label: "   + ValueA[i].label + "<br>";
+          text += "Radius: "  + r + "<br>";
+          text += "Phi: "     + phi + "<br>";
+          text += "X: "     + posAxis.x + "<br>";
+          text += "Y: "     + posAxis.y + "<br>";
+        }
+        svg.appendChild(polygon);        
+        document.getElementById("demo").innerHTML = text;
+      }
+      /*C; Cpp; Asembly; Make; Debugging*/
+      let Values = [{value:90,label:"C"}, {value:80,label:"C++"}, {value:60,label:"Python"},{value:70,label:"Assembler"}, {value:80,label:"Java"}];
+      print_dimant(300,300,250,Values, Values.length);
+           
+    </script>
+  </body>  
+
+</html>

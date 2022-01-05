@@ -32,7 +32,7 @@
         return XYPos;
       }
       
-      function Radar_grafic (svg, ValueA, ValueC, RingC, color)
+      function Radar_grafic (svg, ValueA, ValueC, RingCnt, RingColor, color)
       {
         /* Values: */
         let width = svg.clientWidth;
@@ -42,8 +42,9 @@
           y:(height/2)
         };
         let MaxRadius = Math.min(center.x, center.y);
-        let Radius = MaxRadius - 32;/*px*/
         let RadiusMarker = MaxRadius - 16; /*px*/ 
+        let RadiusBorder = RadiusMarker - 16;/*px*/
+        let Radius = RadiusBorder - 16;
         let RingRadius = Radius;
 
 
@@ -57,13 +58,13 @@
         
         
         /*Create Rings*/
-        for (i = 0; i < RingC; i++)
+        for (i = 0; i < RingCnt; i++)
         {
           let ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');            
           ring.setAttribute("cx",center.x);
           ring.setAttribute("cy",center.y);
-          ring.setAttribute("r", (((RingRadius * (i+1) )/RingC )));
-          ring.setAttribute("stroke","black");
+          ring.setAttribute("r", (((RingRadius * (i+1) )/RingCnt )));
+          ring.setAttribute("stroke",RingColor);
           ring.setAttribute("stroke-width","2");
           ring.setAttribute("fill-opacity","0");
           svg.appendChild(ring);
@@ -77,7 +78,7 @@
           let posVal = toXY(center, r, phi);
           let posAxis = toXY(center, r, phi);
           let posMarker = toXY(center, r+20, phi);          
-          if (RingC > 0)
+          if (RingCnt > 0)
           {
             posMarker = toXY(center, RadiusMarker, phi);
             posAxis = toXY(center, Radius, phi);
@@ -97,14 +98,14 @@
           line.setAttribute("y1",center.y);
           line.setAttribute("x2",posAxis.x);
           line.setAttribute("y2",posAxis.y);
-          line.setAttribute("stroke","black");
+          line.setAttribute("stroke",RingColor);
           line.setAttribute("stroke-width","2");
 
           /*Marker:*/
           marker.setAttribute("cx",posMarker.x);
           marker.setAttribute("cy",posMarker.y);
           marker.setAttribute("r",12);
-          marker.setAttribute("stroke","black");
+          marker.setAttribute("stroke",RingColor);
           marker.setAttribute("stroke-width","2");
           marker.setAttribute("fill-opacity","0");
 
@@ -112,7 +113,7 @@
           mLabel.setAttribute("x",posMarker.x);
           mLabel.setAttribute("y",posMarker.y);
           mLabel.textContent = (i+1);
-          mLabel.setAttribute("fill","black");
+          mLabel.setAttribute("fill",RingColor);
           mLabel.setAttribute("font-weight", "bold");
           mLabel.setAttribute("font-family", "Verdana");
           mLabel.setAttribute("dominant-baseline","middle");
@@ -140,14 +141,14 @@
           list.appendChild(litem);
         }
       }
-      function Radar(cSvg,cList, list, listC, ringC, color)
+      function Radar(cSvg,cList, list, listC, ringCnt, ringColor, color)
       {
-        Radar_grafic(cSvg,list,listC, ringC, color);
+        Radar_grafic(cSvg,list,listC, ringCnt, ringColor, color);
         Radar_legend(cList, list,listC);
       }
 
       let skills = [{value:80,label:"Bouldern"},{value:80,label:"Musik"}, {value:30,label:"Kochen"}, {value:10,label:"Tanzen"}, {value:99,label:"Pupsen"}];
-      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3, "blue");
+      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3, "black","blue");
     </script>
   </body>  
 

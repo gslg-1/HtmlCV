@@ -32,7 +32,7 @@
         return XYPos;
       }
       
-      function Radar_grafic (svg, ValueA, ValueC, RingC, color, sColor)
+      function Radar_grafic (svg, ValueA, ValueC, RingC, color)
       {
         /* Values: */
         let width = svg.clientWidth;
@@ -49,9 +49,11 @@
 
         /* Single Elements */
         let polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');        
-        polygon.setAttribute("style","stroke-width:2;fill-opacity:0.5;");
         polygon.setAttribute("fill",color);
-        polygon.setAttribute("stroke-color",sColor);
+        polygon.setAttribute("stroke",color);
+        polygon.setAttribute("fill-opacity",0.4);
+        polygon.setAttribute("stroke-opacity",0.4);
+        polygon.setAttribute("stroke-width",2);
         
         
         /*Create Rings*/
@@ -138,14 +140,14 @@
           list.appendChild(litem);
         }
       }
-      function Radar(cSvg,cList, list, listC, ringC, color, sColor)
+      function Radar(cSvg,cList, list, listC, ringC, color)
       {
-        Radar_grafic(cSvg,list,listC, ringC, color, sColor);
+        Radar_grafic(cSvg,list,listC, ringC, color);
         Radar_legend(cList, list,listC);
       }
 
       let skills = [{value:80,label:"Bouldern"},{value:80,label:"Musik"}, {value:30,label:"Kochen"}, {value:10,label:"Tanzen"}, {value:99,label:"Pupsen"}];
-      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3, "white","orange");
+      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3, "blue");
     </script>
   </body>  
 

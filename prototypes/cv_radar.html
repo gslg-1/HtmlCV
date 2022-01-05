@@ -7,8 +7,8 @@
       
     </style>
   </head>
-  <body >
-    <svg id="diamond" width="600" height="600" display="block" style="background-color: green;" >
+  <body style="background-color: green;" >
+    <svg id="diamond" width="600" height="600" display="block"  >
     </svg>
 
     <ol id="List" style="font-family: Arial, Helvetica, sans-serif;">
@@ -32,7 +32,7 @@
         return XYPos;
       }
       
-      function Radar_grafic (svg, ValueA, ValueC, RingC)
+      function Radar_grafic (svg, ValueA, ValueC, RingC, color, sColor)
       {
         /* Values: */
         let width = svg.clientWidth;
@@ -49,7 +49,10 @@
 
         /* Single Elements */
         let polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');        
-        polygon.setAttribute("style","fill:blue;stroke:purple;stroke-width:2;fill-opacity:0.5;");
+        polygon.setAttribute("style","stroke-width:2;fill-opacity:0.5;");
+        polygon.setAttribute("fill",color);
+        polygon.setAttribute("stroke-color",sColor);
+        
         
         /*Create Rings*/
         for (i = 0; i < RingC; i++)
@@ -83,7 +86,7 @@
           let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
           let mLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     
-          /*Daimond Edges: */
+          /*Daimond Edges: */          
           point.x = posVal.x;
           point.y = posVal.y;
 
@@ -135,14 +138,14 @@
           list.appendChild(litem);
         }
       }
-      function Radar(cSvg,cList, list, listC, ringC)
+      function Radar(cSvg,cList, list, listC, ringC, color, sColor)
       {
-        Radar_grafic(cSvg,list,listC, ringC);
+        Radar_grafic(cSvg,list,listC, ringC, color, sColor);
         Radar_legend(cList, list,listC);
       }
 
       let skills = [{value:80,label:"Bouldern"},{value:80,label:"Musik"}, {value:30,label:"Kochen"}, {value:10,label:"Tanzen"}, {value:99,label:"Pupsen"}];
-      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3);
+      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3, "white","orange");
     </script>
   </body>  
 

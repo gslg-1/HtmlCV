@@ -32,7 +32,7 @@
         return XYPos;
       }
       
-      function print_dimant (svg, ValueA, ValueC)
+      function print_dimant (svg, ValueA, ValueC, RingC)
       {
         /* Values: */
         let width = svg.clientWidth;
@@ -44,27 +44,45 @@
         let MaxRadius = Math.min(center.x, center.y);
         let Radius = MaxRadius - 32;/*px*/
         let RadiusMarker = MaxRadius - 16; /*px*/ 
+        let RingRadius = Radius;
 
 
         /* Single Elements */
-        let polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        
+        let polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');        
         polygon.setAttribute("style","fill:blue;stroke:purple;stroke-width:2;fill-opacity:0.5;");
         
+        /*Create Rings*/
+        for (i = 0; i < RingC; i++)
+        {
+          let ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');            
+          ring.setAttribute("cx",center.x);
+          ring.setAttribute("cy",center.y);
+          ring.setAttribute("r", (((RingRadius * (i+1) )/RingC )));
+          ring.setAttribute("stroke","black");
+          ring.setAttribute("stroke-width","1");
+          ring.setAttribute("fill-opacity","0");
+          svg.appendChild(ring);
+        }
+        /*Creaet Axis Related Elements*/
         for (let i = 0; i < ValueC; i++)
         {
           /*Values*/
           let phi = toAngle(ValueC,i);
           let r = (Radius * ValueA[i].value) /100;
           let posVal = toXY(center, r, phi);
-          let posMarker = toXY(center, RadiusMarker, phi);
-          let posAxis = toXY(center, Radius, phi);
+          let posAxis = toXY(center, r, phi);
+          let posMarker = toXY(center, r+20, phi);          
+          if (RingC > 0)
+          {
+            posMarker = toXY(center, RadiusMarker, phi);
+            posAxis = toXY(center, Radius, phi);
+          }
           /*Elements:*/
           let point = svg.createSVGPoint();          
           let marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
           let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
           let mLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          
+                    
           /*Daimond Edges: */
           point.x = posVal.x;
           point.y = posVal.y;
@@ -112,16 +130,14 @@
         for (i = 0; i < ElementCount; i++)
         {
           let litem = document.createElement('li');
-          console.log(Elements[i].label);
+          //console.log(Elements[i].label);
           litem.innerHTML = Elements[i].label;
           list.appendChild(litem);
         }
-
-
       }
 
       let skills = [{value:80,label:"Bouldern"},{value:80,label:"Musik"}, {value:30,label:"Kochen"}, {value:10,label:"Tanzen"}, {value:99,label:"Pupsen"}];
-      print_dimant(document.getElementById("diamond"),skills, skills.length, );
+      print_dimant(document.getElementById("diamond"),skills, skills.length, 5);
       ListLegend(document.getElementById("List"),skills, skills.length );
     </script>
   </body>  

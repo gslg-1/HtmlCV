@@ -8,7 +8,7 @@
     </style>
   </head>
   <body >
-    <svg id="diamond" width="600" height="600" display="block" >
+    <svg id="diamond" width="600" height="600" display="block" style="background-color: green;" >
     </svg>
 
     <ol id="List" style="font-family: Arial, Helvetica, sans-serif;">
@@ -32,7 +32,7 @@
         return XYPos;
       }
       
-      function print_dimant (svg, ValueA, ValueC, RingC)
+      function Radar_grafic (svg, ValueA, ValueC, RingC)
       {
         /* Values: */
         let width = svg.clientWidth;
@@ -59,7 +59,7 @@
           ring.setAttribute("cy",center.y);
           ring.setAttribute("r", (((RingRadius * (i+1) )/RingC )));
           ring.setAttribute("stroke","black");
-          ring.setAttribute("stroke-width","1");
+          ring.setAttribute("stroke-width","2");
           ring.setAttribute("fill-opacity","0");
           svg.appendChild(ring);
         }
@@ -121,7 +121,7 @@
         }
         svg.appendChild(polygon);
       }
-      function ListLegend( list, Elements, ElementCount )
+      function Radar_legend( list, Elements, ElementCount )
       {
         /*Frame:*/
         let width = list.offsetWidth;
@@ -135,10 +135,14 @@
           list.appendChild(litem);
         }
       }
+      function Radar(cSvg,cList, list, listC, ringC)
+      {
+        Radar_grafic(cSvg,list,listC, ringC);
+        Radar_legend(cList, list,listC);
+      }
 
       let skills = [{value:80,label:"Bouldern"},{value:80,label:"Musik"}, {value:30,label:"Kochen"}, {value:10,label:"Tanzen"}, {value:99,label:"Pupsen"}];
-      print_dimant(document.getElementById("diamond"),skills, skills.length, 5);
-      ListLegend(document.getElementById("List"),skills, skills.length );
+      Radar(document.getElementById("diamond"),document.getElementById("List"),skills, skills.length, 3);
     </script>
   </body>  
 

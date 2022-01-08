@@ -136,6 +136,7 @@ function RadarLegend(list, Elements, ElementCount) {
     litem.innerHTML = Elements[i];
     list.appendChild(litem);
   }
-
-
 }
+
+
+/**/

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> CV </title>
+    <link type = "text/css" href = "styles/style1.css" media = " all" />
+    <meta charset="UTF-8">
+
+    <style>  
+    </style>
+    <script src="resources/scripts/gslgGraphics.js" ></script>
+
+  </head>
+  <body style="background-color: green;" >
+    <svg id="diamond" width="600" height="600" display="block"  >
+    </svg>
+
+    <ol id="List" style="font-family: Arial, Helvetica, sans-serif;">
+    </ol>
+
+    <script>
+      let var_svg = document.getElementById("diamond");
+      let var_list = document.getElementById("List");
+      let hMetric =     ["Bouldern",  "Musik",  "Kochen", "Tanzen", "Pupsen"];
+      let NeleHV =      [75,          85,       80,       80,       90];
+      let GabrielHV =   [83,          60,       60,       10,       100];
+      console.log("reached");
+      RadarPlane(var_svg, hMetric, hMetric.length, 0,3, "white");
+      RadarFigure(var_svg,  NeleHV,     hMetric.length, "red");
+      RadarFigure(var_svg, GabrielHV,  hMetric.length, "grey");
+      RadarLegend(var_list, hMetric, hMetric.length);
+    </script>
+  </body>  
+</html>

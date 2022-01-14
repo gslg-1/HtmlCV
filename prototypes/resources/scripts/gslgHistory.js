@@ -82,9 +82,12 @@ class History {
     this.mDivCntnt.style.cssFloat = "left";
     this.mDivCntnt.style.boxSizing = "border-box";
     this.mDivCntnt.style.boxSizoverflowing = "auto";
-    
+        
+    this.mContainer.style.overflow = "auto";
+
     this.mContainer.appendChild(this.mDivMrkr);
     this.mContainer.appendChild(this.mDivCntnt);
+
     this.mObjMrkr = new HistoryMarker(this.mDivMrkr, array);
     this.mObjCntnt = new HistoryContent(this.mDivCntnt, array);
   }

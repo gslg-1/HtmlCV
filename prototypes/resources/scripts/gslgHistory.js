@@ -11,12 +11,19 @@ class HistoryContent{
     let height = 0;
     for (let i = 0 ; i < array.length; i++ )
     {
-      let paragraph = document.createElement('p');
+      let paragraph = document.createElement('div');
+      paragraph.style.fontSize =this.textSize;
       paragraph.innerText = array[i].desc;
-      paragraph.style.borderStyle = "stroke:black, stroke-width:2"
+      paragraph.style.height = 'auto';
+      paragraph.style.width = '100%'
+      paragraph.style.overflowWrap = 'break-word'
+      paragraph.style.padding = this.textSize + 'px';
+      paragraph.style.textAlign = 'left';
+      paragraph.style.textIndent = 24 + 'px';
+      paragraph.style.borderWidth = 2 + 'px';
+      paragraph.style.borderColor = "Black";
       this.mContainer.appendChild(paragraph);
       height = paragraph.offsetHeight;
-      console.log('Height(' + i + '):' + height );
       dArray.push(height);
     }
     this.mDistArray = dArray;
@@ -32,18 +39,18 @@ class HistoryContent{
 }
 
 class HistoryMarker{
-  constructor(div, array)
+  constructor(div, cntntArray, distArray )
   {
     this.mContainer = div;
-    this.fill(array);
+    this.fill(cntntArray, distArray);
   }
 
-  fill(array) {
+  fill(cntntArray, distArray) {
     
-    for (let i = 0 ; i < array.length; i++ )
+    for (let i = 0 ; i < cntntArray.length; i++ )
     {
-      this.write(array[i].duration,"h1");
-      this.write(array[i].sDesc,"p");
+      this.write(cntntArray[i].duration,"h1");
+      this.write(cntntArray[i].sDesc,"p");
     }
   }
   write(text, eType) {
@@ -57,11 +64,11 @@ class HistoryMarker{
 }
 
 class HistoryGraph{
-  constructor(svg, array, startDist){
+  constructor(svg, array, textSize){
     this.mSvg = svg;
-    this.fill(array,startDist);
+    this.fill(array,(textSize / 2));
   }
-  fill(array,startDist, LOG) {
+  fill(array,startDist) {
     let y1 = startDist;
     let i = 0;
     for ( i = 0 ; i < array.length; i++ )
@@ -93,20 +100,13 @@ class HistoryGraph{
       this.mSvg.append(nLine);
       this.mSvg.append(nDot);
     }
-    let nLastDot = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    nLastDot.setAttribute('r','8');
-    nLastDot.setAttribute('fill','red' );
-    nLastDot.setAttribute('stroke','black' );
-    nLastDot.setAttribute('stroke-width','2' );
-    nLastDot.setAttribute('cx','50%' );
-    y1 = y1 + array[array.length -1];
-    nLastDot.setAttribute('cy','' + y1);
-    this.mSvg.append(nLastDot);
+    
   }
 }
 class History {
-  constructor( container , array) {
+  constructor( container , array, cntntTxtSize) {
     this.mContainer = container;
+    this.mCntntTxtSize = cntntTxtSize;
     this.Create(array);
   }
   Create(array) {
@@ -138,10 +138,10 @@ class History {
     this.mContainer.appendChild(this.mDivMrkr);
     this.mContainer.appendChild(this.mSVG);
     this.mContainer.appendChild(this.mDivCntnt);
-
-    this.mObjCntnt = new HistoryContent(this.mDivCntnt, array);
+    
+    this.mObjCntnt = new HistoryContent(this.mDivCntnt, array, this.mCntntTxtSize);
     this.mObjMrkr = new HistoryMarker(this.mDivMrkr, array);
-    this.mObjPath = new HistoryGraph(this.mSVG, this.mObjCntnt.getDistArray(),16);
+    this.mObjPath = new HistoryGraph(this.mSVG, this.mObjCntnt.getDistArray(), this.mCntntTxtSize);
   }
   
 }
